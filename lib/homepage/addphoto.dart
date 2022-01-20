@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as kIsWeb;
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/homepage/sendphototofirebase.dart';
 import 'package:instagram_clone/providers/addphotoprovider.dart';
 
 Future<void> addPhoto({
@@ -31,11 +32,13 @@ Future<void> addPhoto({
               ),
               Expanded(
                 child: ElevatedButton(
-                    onPressed: () => choosePhoto(
-                          isGallery: true,
-                          provider: provider,
-                          context: context,
-                        ),
+                    onPressed: () async {
+                      await choosePhoto(
+                        isGallery: true,
+                        provider: provider,
+                        context: context,
+                      );
+                    },
                     child: Text("Gallery")),
               ),
             ],
@@ -84,8 +87,21 @@ Future<void> confirmPhoto({
         Text(provider.getPath),
         Container(
           color: Colors.red,
-          child: Image.file(File(provider.getPath)),
+          child: Image.file(
+            File(provider.getPath),
+            height: MediaQuery.of(context).size.height / 3,
+          ),
         ),
+        provider.getLoading
+            ? const Text("Uploading And Posting ...")
+            : ElevatedButton(
+                onPressed: () async {
+                  provider.changeLoadingStatus(true);
+                  await sendToFirebase(path: provider.path);
+                  provider.changeLoadingStatus(false);
+                },
+                child: const Text("Confirm Post"),
+              ),
       ],
     ),
   );

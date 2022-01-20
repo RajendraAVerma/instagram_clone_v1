@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/widgets/postlistveiw.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({Key? key}) : super(key: key);
@@ -9,8 +10,15 @@ class HomeContent extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Instagram Clone"),
       ),
-      body: Container(
-        color: Colors.amber,
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.amber,
+          child: Column(
+            children: [
+              PostListView(),
+            ],
+          ),
+        ),
       ),
     );
   }

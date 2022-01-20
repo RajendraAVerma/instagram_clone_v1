@@ -3,6 +3,7 @@ import 'package:instagram_clone/model/usermodel.dart';
 import 'package:instagram_clone/providers/newaccountformprovider.dart';
 import 'package:provider/provider.dart';
 
+// this is creating form statefulwidget
 class CreatingAccountForm extends StatefulWidget {
   const CreatingAccountForm({
     Key? key,
