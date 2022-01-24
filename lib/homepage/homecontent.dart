@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/follows/widget/userlistfollow.dart';
 import 'package:instagram_clone/widgets/postlistveiw.dart';
 
 class HomeContent extends StatelessWidget {
@@ -15,6 +16,7 @@ class HomeContent extends StatelessWidget {
           color: Colors.amber,
           child: Column(
             children: [
+              UserListFollow(),
               PostListView(),
             ],
           ),

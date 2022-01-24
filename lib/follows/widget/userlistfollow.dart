@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/follows/widget/followcardbutton.dart';
 import 'package:instagram_clone/model/usermodel.dart';
 
 class UserListFollow extends StatelessWidget {
@@ -39,10 +40,7 @@ class UserListFollow extends StatelessWidget {
       child: Column(
         children: [
           Text(userModel.userName),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text("Follow"),
-          ),
+          FollowCardButton(userModel: userModel),
         ],
       ),
     );

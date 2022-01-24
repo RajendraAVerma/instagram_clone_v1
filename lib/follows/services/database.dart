@@ -59,17 +59,15 @@ class FollowsDatabase {
     }
   }
 
-  static Query<Following> isIFollowQuery({required String userId}) {
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> isIFollowQuery(
+      {required String userId}) {
+    print(userId + "Streaming checking");
     final ref = firestore
         .collection('users')
         .doc(currentUserId.uid)
         .collection('following')
-        .where('id', isEqualTo: userId)
-        .withConverter<Following>(
-          fromFirestore: (snapshot, options) =>
-              Following.fromJson(snapshot.data() as Map<String, dynamic>),
-          toFirestore: (value, options) => value.toJson(),
-        );
+        .doc(userId)
+        .snapshots();
     return ref;
   }
 
